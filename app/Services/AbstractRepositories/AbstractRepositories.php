@@ -11,22 +11,31 @@ abstract class AbstractRepositories
 {
     protected Model $model;
 
+    abstract protected function setModel();
+
+    protected function getModel(): Model
+    {
+
+        $model = $this->setModel();
+        return $model;
+    }
+
     public function getBy(array $filters = [], int $limit = 50, int $offset = 0): Collection
     {
-        $model = $this->model;
+        $model = $this->getModel();
         $qb = $model::query();
         $this->applyFilters($qb, $filters);
-//        dd($qb);
+
         $qb->take($limit);
         $qb->skip($offset);
 
         return $qb->get();
     }
 
-    private function applyFilters(Builder $qb, array $filters): void
+    protected function applyFilters(Builder $qb, array $filters): void
     {
         if (!empty($filters['title'])) {
-            $qb->where(['title', 'LIKE', $filters['title']]);
+            $qb->where('title','LIKE','%'.$filters['title'].'%');
         }
         if (!empty($filters['id'])) {
             $qb->where(['id' => $filters['id']]);

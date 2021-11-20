@@ -15,7 +15,7 @@ class ApiRoutesProvider
         ],
             function () {
                 Route::group([
-                    'prefix'=>'/restaurant'
+                    'prefix'=>'/restaurants'
                 ],
                     function (){
                         Route::get('/', ApiRestaurantIndexController::class)
