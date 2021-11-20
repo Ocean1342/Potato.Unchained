@@ -25,6 +25,7 @@ class Restaurant extends Model
     use HasFactory;
 
     public $timestamps = false;
+
     protected $fillable = [
         'title', 'city_id'
     ];

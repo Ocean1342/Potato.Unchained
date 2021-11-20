@@ -21,20 +21,6 @@ use WeStacks\TeleBot\Objects\Update;
 |
 */
 
-Route::get('/tg',function (){
-//    dump(app(TestTelebotService::class)->handle());
-//    $var = app(TestTelebotService::class);
-//    $var = new TestTelebotService(,new Update());
-    //    TeleBot::sendMessage(['chat_id'=>123,'text'=>'privet']);
-
-    TeleBot::addHandler(TestTelebotService::class);
-    $var = TeleBot::getUpdates();
-        //    TeleBot::getMe();
-    dump($var);
-//    dump($var->handle());
-});
-
 Route::get('/', function () {
-//    Log::channel('telegram')->debug('hello!');
     return view('welcome');
 });
