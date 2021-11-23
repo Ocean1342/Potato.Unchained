@@ -9,7 +9,6 @@ class ApiOrderBaseController extends ApiBaseController
 {
     protected function getOrderService()
     {
-//        dd('tt');
         return app(OrdersService::class);
     }
 }

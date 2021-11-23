@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * App\Models\Dish
  *
  * @property int $id
- * @property int $restoran_id
+ * @property int $restaurant_id
  * @property int $category_id
  * @property string $title
  * @property string $price
@@ -37,7 +38,7 @@ class Dish extends Model
     use HasFactory;
 
     protected $fillable = [
-        'restoran_id',
+        'restaurant_id',
         'category_id',
         'title',
         'price',
@@ -49,4 +50,8 @@ class Dish extends Model
         'updated_at'
     ];
 
+    public function orders(): BelongsToMany
+    {
+        return $this->belongsToMany(Order::class);
+    }
 }

@@ -15,11 +15,11 @@ class ApiRestaurantDetailController extends ApiRestaurantBaseController
      * Handle the incoming request.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return App\Http\Resources\RestaurantResource
      */
-    public function __invoke($id,ApiRestaurantRequest $request)
+    public function __invoke($id)
     {
-        $ret = $this->getRestaurantsService()->detail($id,$request->toArray());
-        return RestaurantResource::collection($ret);
+        $ret = $this->getRestaurantsService()->detail($id);
+        return new RestaurantResource($ret);
     }
 }

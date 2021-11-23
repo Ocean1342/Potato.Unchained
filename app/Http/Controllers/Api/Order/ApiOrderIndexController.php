@@ -2,18 +2,14 @@
 
 namespace App\Http\Controllers\Api\Order;
 
+use App\Http\Resources\OrderResource;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class ApiOrderIndexController extends ApiOrderBaseController
 {
-    /**
-     * Handle the incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function __invoke(Request $request)
     {
-        return $this->getOrderService()->index($request->all());
+        return OrderResource::collection($this->getOrderService()->index($request->all()));
     }
 }

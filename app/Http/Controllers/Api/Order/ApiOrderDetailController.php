@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\Order;
 
-use App\Http\Controllers\Api\Order\Requests\ApiOrderRequest;
+use App\Http\Controllers\Api\Order\Requests\ApiOrderCreateRequest;
 use App\Http\Controllers\Controller;
 
 class ApiOrderDetailController extends ApiOrderBaseController
@@ -13,8 +13,8 @@ class ApiOrderDetailController extends ApiOrderBaseController
      * @param  App\Http\Controllers\Api\Order\Requests\ApiOrderRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke($id,ApiOrderRequest $request)
+    public function __invoke($id)
     {
-        return $this->getOrderService()->detail($id, $request->all());
+        return $this->getOrderService()->detail($id);
     }
 }

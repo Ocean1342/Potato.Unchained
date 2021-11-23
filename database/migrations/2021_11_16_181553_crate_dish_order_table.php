@@ -21,6 +21,8 @@ class CrateDishOrderTable extends Migration
                 ->on('orders')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+            $table->integer('amount')->default(1);
+
         });
     }
 

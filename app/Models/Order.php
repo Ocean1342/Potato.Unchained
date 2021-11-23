@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * App\Models\Order
@@ -31,4 +32,9 @@ class Order extends Model
     protected $fillable = [
       'user_id','total'
     ];
+    public function dishes(): BelongsToMany
+    {
+        return $this->belongsToMany(Dish::class)->withPivot('amount');
+
+    }
 }

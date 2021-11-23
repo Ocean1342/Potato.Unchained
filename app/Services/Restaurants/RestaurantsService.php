@@ -23,8 +23,8 @@ class RestaurantsService extends AbstractServices
         return $this->indexRestaurantHandler->handle($data);
     }
 
-    public function detail($id,array $data)
+    public function detail($id)
     {
-        return $this->detailRestaurantHandler->handle($id,$data);
+        return $this->detailRestaurantHandler->handle($id);
     }
 }

@@ -13,12 +13,8 @@ class DetailRestaurantHandler extends AbstractRestaurantHandler
     /**
      * @throws ApiDataNotFoundException
      */
-    public function handle($id, array $data)
+    public function handle($id)
     {
-        $data['id'] = $id;
-        $ret = $this->restaurantsRepositories->getBy($data);
-        if (!$ret->count())
-            throw new ApiDataNotFoundException('Not found restaraunts by ID: '.$id);
-        return $ret;
+        return $this->restaurantsRepositories->getById($id);
     }
 }

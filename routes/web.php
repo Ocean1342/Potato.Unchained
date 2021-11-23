@@ -1,16 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\Order\ApiOrderCreateController;
+use App\Models\Category;
 use App\Models\Dish;
-use App\Models\Restaurant;
-use App\Services\Menu\Handlers\allMenuHandler;
-use App\Services\Menu\MenuService;
-use App\Services\Menu\Repositories\MenuRepository;
-use App\Services\Restaurants\Repositories\RestaurantsRepositories;
-use App\Services\TeleBotService\TestTelebotService;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
-use WeStacks\TeleBot\Laravel\TeleBot;
-use WeStacks\TeleBot\Objects\Update;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,11 +15,7 @@ use WeStacks\TeleBot\Objects\Update;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/test',function (){
-    dump(Restaurant::all());
-    $ret = app(RestaurantsRepositories::class)->getBy(['title'=>'R']);
-    dump($ret);
-});
+Route::get('/test',ApiOrderCreateController::class);
 
 Route::get('/', function () {
     return view('welcome');

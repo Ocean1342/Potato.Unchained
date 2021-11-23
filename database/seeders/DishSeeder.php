@@ -16,7 +16,7 @@ class DishSeeder extends Seeder
     public function run()
     {
         Dish::factory()->create([
-            'restoran_id' => 1,
+            'restaurant_id' => 1,
             'category_id' => 1,
             'image' => 'test',
             'price' => 150,
@@ -25,7 +25,7 @@ class DishSeeder extends Seeder
         ]);
 
         Dish::factory()->create([
-            'restoran_id' => 1,
+            'restaurant_id' => 1,
             'category_id' => 2,
             'image' => 'test',
             'price' => 200,
@@ -33,7 +33,7 @@ class DishSeeder extends Seeder
             'description' => 'hot descr pasta carbonara hit'
         ]);
         Dish::factory()->create([
-            'restoran_id' => 1,
+            'restaurant_id' => 1,
             'category_id' => 3,
             'image' => 'test',
             'price' => 400,
@@ -41,7 +41,7 @@ class DishSeeder extends Seeder
             'description' => 'big and well'
         ]);
         Dish::factory()->create([
-            'restoran_id' => 1,
+            'restaurant_id' => 1,
             'category_id' => 4,
             'image' => 'test',
             'price' => 100,

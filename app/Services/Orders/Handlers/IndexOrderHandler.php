@@ -15,6 +15,6 @@ class IndexOrderHandler extends AbstractOrderHandler
 
     public function handle(array $data): Collection
     {
-        return $this->ordersRepositories->getBy($data);
+        return $this->ordersRepositories->getWithDishes($data);
     }
 }
