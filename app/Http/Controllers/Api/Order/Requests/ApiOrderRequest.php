@@ -27,8 +27,9 @@ class ApiOrderRequest extends FormRequest
     public function rules()
     {
         return [
-            //валидация не работает
-            //'dishes.dish_id' => 'required|int|max:255',
+            'user.id' =>'required|int',
+            'dishes.*.dish_id' => 'required|int|max:255',
+            'dishes.*.amount' => 'int|min:1|max:100'
         ];
     }
 
@@ -39,15 +40,6 @@ class ApiOrderRequest extends FormRequest
             'message' => 'Validation errors',
             'data' => $validator->errors()
         ], 400));
-    }
-
-    public function messages()
-    {
-        return [
-            'dishes.dish_id.required' => 'dish_id is required. ',
-            'dishes.dish_id.int' => 'Should be int.',
-            'dishes.dish_id.max' => 'max length 50'
-        ];
     }
 
 }

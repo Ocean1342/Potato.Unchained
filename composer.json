@@ -11,6 +11,7 @@
         "laravel/framework": "^8.65",
         "laravel/sanctum": "^2.12",
         "laravel/tinker": "^2.5",
+        "laravel/ui": "^3.3",
         "westacks/telebot": "^1.13"
     },
     "require-dev": {
