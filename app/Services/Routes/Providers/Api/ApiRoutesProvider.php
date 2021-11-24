@@ -15,6 +15,7 @@ class ApiRoutesProvider
     {
         Route::group([
             //group conditions
+            'middleware'=>'auth_api:sanctum'
         ],
             function () {
                 Route::group([
