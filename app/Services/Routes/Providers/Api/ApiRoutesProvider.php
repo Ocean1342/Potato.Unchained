@@ -15,6 +15,7 @@ class ApiRoutesProvider
     {
         Route::group([
             //group conditions
+            'middleware'=>'auth:api'
         ],
             function () {
                 Route::group([
@@ -24,7 +25,8 @@ class ApiRoutesProvider
                         Route::get('/', ApiRestaurantIndexController::class)
                             ->name(ApiRoutes::API_RESTAURANT_INDEX);
                         Route::get('/{id}', ApiRestaurantDetailController::class)
-                            ->name(ApiRoutes::API_RESTAURANT_DETAIL);
+                            ->name(ApiRoutes::API_RESTAURANT_DETAIL)
+                            ->where('id', '\d+');
                     });
                 Route::group([
                     'prefix'=>'/orders'
@@ -33,7 +35,8 @@ class ApiRoutesProvider
                         Route::get('/', ApiOrderIndexController::class)
                             ->name(ApiRoutes::API_ORDERS_INDEX);
                         Route::get('/{id}', ApiOrderDetailController::class)
-                            ->name(ApiRoutes::API_ORDERS_DETAIL);
+                            ->name(ApiRoutes::API_ORDERS_DETAIL)
+                            ->where('id', '\d+');
                         Route::post('/', ApiOrderCreateController::class)
                             ->name(ApiRoutes::API_ORDERS_CREATE);
                     });
