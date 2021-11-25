@@ -71,9 +71,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function generateTestToken(): array
+    public function generateTestToken(): string
     {
         $token = $this->createToken('test-token');
-        return ['token' => $token->plainTextToken];
+        return $token->plainTextToken;
     }
 }

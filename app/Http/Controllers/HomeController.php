@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -21,8 +22,17 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->post()['need-token']) {
+            /*TODO: запретить бесконечное создание токенов*/
+//            dd($request->post());
+            $token = User::find($request->user()->id)->generateTestToken();
+            return view('home', [
+                'token' => $token,
+                'user_id'=> $request->user()->id
+            ]);
+        }
         return view('home');
     }
 }

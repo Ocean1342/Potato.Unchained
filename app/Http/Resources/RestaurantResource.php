@@ -2,8 +2,14 @@
 
 namespace App\Http\Resources;
 
+use App\Models\City;
+use App\Models\Dish;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ *  @mixin Dish
+ *  @mixin City
+ * */
 class RestaurantResource extends JsonResource
 {
     /**
@@ -14,6 +20,14 @@ class RestaurantResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'city_id' => $this->city_id,
+            'city_title'=>$this->city->name ,
+            'title' => $this->title,
+            'latitude' => $this->latitude,
+            'longitude' => $this->longitude,
+            'dishes' => $this->dishes
+        ];
     }
 }

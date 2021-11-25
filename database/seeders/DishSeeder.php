@@ -18,7 +18,6 @@ class DishSeeder extends Seeder
         Dish::factory()->create([
             'restaurant_id' => 1,
             'category_id' => 1,
-            'image' => 'test',
             'price' => 150,
             'title' => 'pizza peperoni',
             'description' => 'supper pizza descr'
@@ -27,27 +26,24 @@ class DishSeeder extends Seeder
         Dish::factory()->create([
             'restaurant_id' => 1,
             'category_id' => 2,
-            'image' => 'test',
             'price' => 200,
             'title' => 'pasta carbonara',
             'description' => 'hot descr pasta carbonara hit'
         ]);
         Dish::factory()->create([
-            'restaurant_id' => 1,
+            'restaurant_id' => 2,
             'category_id' => 3,
-            'image' => 'test',
             'price' => 400,
             'title' => 'sushi california',
             'description' => 'big and well'
         ]);
         Dish::factory()->create([
-            'restaurant_id' => 1,
+            'restaurant_id' => 2,
             'category_id' => 4,
-            'image' => 'test',
             'price' => 100,
             'title' => 'russia borsh',
             'description' => 'with pampushka'
         ]);
-
+        Dish::factory(10)->create();
     }
 }

@@ -18,7 +18,7 @@ class DishFactory extends Factory
         return [
             'restaurant_id' => rand(1,Restaurant::count()),
             'category_id' => rand(1,Category::count()),
-            'image' => 'test',
+            'image' => 'https://images.potato.test/'.$this->faker->regexify('[a-z]{5}').'.jpg',
             'price' => rand(100,400),
             'title' => $this->faker->country(),
             'description' => $this->faker->text()

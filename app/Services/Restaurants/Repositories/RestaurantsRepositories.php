@@ -13,4 +13,11 @@ class RestaurantsRepositories extends AbstractRepositories
     {
         return $this->model = app(Restaurant::class);
     }
+    protected function applyFilters(Builder $qb, array $filters): void
+    {
+        parent::applyFilters($qb, $filters);
+        if (!empty($filters['city_id'])) {
+            $qb->where(['city_id' => $filters['city_id']]);
+        }
+    }
 }

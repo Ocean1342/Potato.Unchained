@@ -14,8 +14,8 @@ class ApiAuthenticate extends Middleware
      * @param \Illuminate\Http\Request $request
      * @return string|null
      */
-    protected function redirectTo($request)
+    protected function redirectTo($request): HttpResponseException
     {
-        throw new HttpResponseException(response()->json(['message' => 'not authenticated'], 403));
+        throw new HttpResponseException(response()->json(['message' => 'not authenticated'], 401));
     }
 }

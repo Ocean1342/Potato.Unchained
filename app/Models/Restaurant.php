@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
@@ -21,6 +23,11 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @method static \Illuminate\Database\Eloquent\Builder|Restaurant whereCityId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Restaurant whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Restaurant whereTitle($value)
+ * @property string $latitude
+ * @property string $longitude
+ * @property-read \App\Models\City $city
+ * @method static \Illuminate\Database\Eloquent\Builder|Restaurant whereLatitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Restaurant whereLongitude($value)
  */
 class Restaurant extends Model
 {
@@ -36,4 +43,14 @@ class Restaurant extends Model
     {
         return $this->belongsTo(City::class);
     }
+
+    public function dishes(): HasMany
+    {
+        return $this->HasMany(Dish::class);
+    }
+
+/*    public function city(): HasOne
+    {
+        return $this->hasOne(City::class);
+    }*/
 }

@@ -29,7 +29,7 @@ class ApiOrderRequest extends FormRequest
         return [
             'user.id' =>'required|int',
             'dishes.*.dish_id' => 'required|int|max:255',
-            'dishes.*.amount' => 'int|min:1|max:100'
+            'dishes.*.amount' => 'required|int|min:1|max:100'
         ];
     }
 
