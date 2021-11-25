@@ -16,5 +16,7 @@ class CitySeeder extends Seeder
     {
         City::factory()->create(['name'=>'Moscow']);
         City::factory()->create(['name'=>'Saint-Petersburg']);
+        City::factory()->create(['name'=>'Tver']);
+        City::factory(8)->create();
     }
 }

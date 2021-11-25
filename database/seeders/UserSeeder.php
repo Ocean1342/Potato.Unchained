@@ -14,7 +14,10 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(10)
+        $users = User::factory(10)
             ->create();
+        foreach ($users as $user) {
+            $user->createToken('test-token');
+        }
     }
 }

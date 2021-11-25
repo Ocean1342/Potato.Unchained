@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
+use App\Models\Restaurant;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class DishFactory extends Factory
@@ -14,7 +16,12 @@ class DishFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'restaurant_id' => rand(1,Restaurant::count()),
+            'category_id' => rand(1,Category::count()),
+            'image' => 'test',
+            'price' => rand(100,400),
+            'title' => $this->faker->country(),
+            'description' => $this->faker->text()
         ];
     }
 }

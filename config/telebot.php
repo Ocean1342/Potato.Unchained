@@ -1,6 +1,6 @@
 <?php
 
-use App\Services\TeleBotService\TestTelebotService;
+use App\Services\TeleBotService\LocationTelebotService;
 
 return [
     /*-------------------------------------------------------------------------
@@ -48,7 +48,7 @@ return [
 
             'handlers' => [
                 // Your update handlers
-                App\Services\TeleBotService\TestTelebotService::class,
+                App\Services\TeleBotService\LocationTelebotService::class,
             ],
         ],
 

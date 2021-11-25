@@ -17,6 +17,8 @@ class CreateRestaurantsTable extends Migration
             $table->id();
             $table->integer(('city_id'));
             $table->text(('title'));
+            $table->decimal('latitude',9,6);
+            $table->decimal('longitude',9,6);
         });
     }
 

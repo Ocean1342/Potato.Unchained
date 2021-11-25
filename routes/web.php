@@ -3,6 +3,8 @@
 use App\Http\Controllers\Api\Order\ApiOrderCreateController;
 use App\Models\Category;
 use App\Models\Dish;
+use App\Services\GeoService\GeoPoints;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +18,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/test',ApiOrderCreateController::class);
+
+/*Route::get('/test',function (){
+    $ar = GeoPoints::sortByClosest(60.007116,30.2922932); //spb
+    echo GeoPoints::prettyPrint($ar);
+});*/
 
 Route::get('/', function () {
     return view('welcome');
