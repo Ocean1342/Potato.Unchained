@@ -1,9 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Order\ApiOrderCreateController;
-use App\Models\Category;
-use App\Models\Dish;
-use App\Services\GeoService\GeoPoints;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -30,4 +28,5 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::match(['get','post'],'/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::match(['get','post'],'/home', [HomeController::class,
+    'index'])->name('home');
