@@ -16,6 +16,8 @@ class ApiAuthenticate extends Middleware
      */
     protected function redirectTo($request): HttpResponseException
     {
-        throw new HttpResponseException(response()->json(['message' => 'not authenticated'], 401));
+        throw new HttpResponseException(response()->json([
+            'message' => 'not authorized. Please visit http://potato.test/login to get auth token'
+        ], 401));
     }
 }

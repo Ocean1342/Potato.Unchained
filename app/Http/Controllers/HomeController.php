@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->post()['need-token']) {
+        if (array_key_exists('need-token',$request->post())) {
             /*TODO: запретить бесконечное создание токенов*/
 //            dd($request->post());
             $token = User::find($request->user()->id)->generateTestToken();
