@@ -41,7 +41,7 @@ class CreateOrderHandler extends AbstractOrderHandler
         return response()->json([
             'success' => true,
             'message' => 'Order Created. Order ID: ' . $createdOrder->id,
-            'order_id'=>$createdOrder->id
+            'order_id' => $createdOrder->id
         ]);
     }
 

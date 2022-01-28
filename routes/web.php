@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Api\Order\ApiOrderCreateController;
+use App\Http\Controllers\Api\Order\Requests\ApiOrderRequest;
 use App\Http\Controllers\HomeController;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -15,12 +17,27 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/test',ApiOrderCreateController::class);
-
-/*Route::get('/test',function (){
-    $ar = GeoPoints::sortByClosest(60.007116,30.2922932); //spb
-    echo GeoPoints::prettyPrint($ar);
-});*/
+Route::get('/test',function (ApiOrderRequest $request){
+/*
+    $orderRequest = new ApiOrderRequest([
+        'user'=>[
+            'id'=>'1'
+        ],
+        'dishes'=>[
+            'dish_id'=>'amount'
+        ]
+    ]);*/
+    dd('test');
+    dd($this->validate());
+    dd($orderRequest->rules());
+    dd(collect($orderRequest)->toArray());
+/*    $order = \App\Models\Order::factory()->create([
+       'user_id'=>1,
+       'total' => 100
+    ]);
+    dd($order->id);
+    dd(collect($order)->toArray());*/
+});
 
 Route::get('/', function () {
     return view('welcome');

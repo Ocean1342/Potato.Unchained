@@ -24,13 +24,13 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        if (array_key_exists('need-token',$request->post())) {
+        if (array_key_exists('need-token', $request->post())) {
+
             /*TODO: запретить бесконечное создание токенов*/
-//            dd($request->post());
             $token = User::find($request->user()->id)->generateTestToken();
             return view('home', [
                 'token' => $token,
-                'user_id'=> $request->user()->id
+                'user_id' => $request->user()->id
             ]);
         }
         return view('home');

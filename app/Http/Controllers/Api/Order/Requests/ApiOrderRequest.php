@@ -27,7 +27,8 @@ class ApiOrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'user.id' =>'required|int',
+            'user.id' => 'required|int',
+            'dishes' => 'required',
             'dishes.*.dish_id' => 'required|int|max:255',
             'dishes.*.amount' => 'required|int|min:1|max:100'
         ];
