@@ -26,9 +26,6 @@ class CreateOrderHandler extends AbstractOrderHandler
      */
     public function handle(ApiOrderRequest $request): JsonResponse
     {
-//        проверка на то, что user_id в заказе и токен одинаковые
-        $this->validateToken((int)$request->toArray()['user']['id'], $request);
-
         //проверка на то, что все блюда из одного ресторана
         if (count($request->toArray()['dishes']) > 1)
             $this->checkRestaurantId($request->toArray()['dishes']);
@@ -96,19 +93,5 @@ class CreateOrderHandler extends AbstractOrderHandler
             throw new ApiDataNotFoundException('There is no dish with ID: ' . $curDishId);
         }
         return $curDish;
-    }
-
-    /**
-     * Проверяет соответствие
-     *
-     * @param int $userIdFromOrder
-     * @param ApiOrderRequest $request
-     */
-    protected function validateToken(int $userIdFromOrder, ApiOrderRequest $request): void
-    {
-        if ($userIdFromOrder !== $request->user()->id)
-            throw new HttpResponseException(response()->json([
-                'message' => 'You should use your token. Please login and get your own '], 401)
-            );
     }
 }

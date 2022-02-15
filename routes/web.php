@@ -17,27 +17,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/test',function (ApiOrderRequest $request){
-/*
-    $orderRequest = new ApiOrderRequest([
-        'user'=>[
-            'id'=>'1'
-        ],
-        'dishes'=>[
-            'dish_id'=>'amount'
-        ]
-    ]);*/
-    dd('test');
-    dd($this->validate());
-    dd($orderRequest->rules());
-    dd(collect($orderRequest)->toArray());
-/*    $order = \App\Models\Order::factory()->create([
-       'user_id'=>1,
-       'total' => 100
-    ]);
-    dd($order->id);
-    dd(collect($order)->toArray());*/
-});
 
 Route::get('/', function () {
     return view('welcome');
@@ -45,5 +24,5 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::match(['get','post'],'/home', [HomeController::class,
+Route::match(['get', 'post'], '/home', [HomeController::class,
     'index'])->name('home');
