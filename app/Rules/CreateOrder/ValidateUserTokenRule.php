@@ -1,14 +1,15 @@
 <?php
-
+declare(strict_types=1);
 namespace App\Rules\CreateOrder;
 
 use App\Http\Controllers\Api\Order\Requests\ApiOrderRequest;
 use Illuminate\Contracts\Validation\Rule;
 
-class CreateOrderValidateTokenRule implements Rule
+class ValidateUserTokenRule implements Rule
 {
     /**
-     * Create a new rule instance.
+     * Проверка на то, что user_id в заказе и токен авторизации совпадают.
+     * Пользователь может делать заказ только под своим id
      *
      * @return void
      */
@@ -18,8 +19,6 @@ class CreateOrderValidateTokenRule implements Rule
     }
 
     /**
-     * Проверка на то, что user_id в заказе и токен авторизации совпадают.
-     * Пользователь может делать заказ только под своим id
      *
      * @param string $attribute name of attribute
      * @param mixed $value
@@ -27,7 +26,7 @@ class CreateOrderValidateTokenRule implements Rule
      */
     public function passes($attribute, $value): bool
     {
-        return collect(request()->user())['id'] === $value;
+        return collect(request()->user())['id'] === (int) $value;
     }
 
     /**

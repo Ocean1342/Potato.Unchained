@@ -80,18 +80,4 @@ class CreateOrderHandler extends AbstractOrderHandler
         }
     }
 
-    /**
-     * @param mixed $curDishId
-     * @return Dish
-     * @throws ApiDataNotFoundException
-     */
-    protected function validateDish(mixed $curDishId): Dish
-    {
-        //выбросить исключение, если такого продукта нет
-        $curDish = Dish::find($curDishId);
-        if (!$curDish) {
-            throw new ApiDataNotFoundException('There is no dish with ID: ' . $curDishId);
-        }
-        return $curDish;
-    }
 }

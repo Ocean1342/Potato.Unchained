@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Api\Order\Requests;
 
-use App\Rules\CreateOrder\CreateOrderValidateTokenRule;
+use App\Rules\CreateOrder\ValidateDishesArray;
+use App\Rules\CreateOrder\ValidateDishesRule;
+use App\Rules\CreateOrder\ValidateUserTokenRule;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -28,9 +30,9 @@ class ApiOrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'user.id' => ['required','int',new CreateOrderValidateTokenRule()],
-            'dishes' => 'required',
-            'dishes.*.dish_id' => 'required|int|max:255',
+            'user.id' => ['required','int',new ValidateUserTokenRule()],
+            'dishes' => ['required',new ValidateDishesArray()],
+            'dishes.*.dish_id' => ['required','integer'],
             'dishes.*.amount' => 'required|int|min:1|max:100'
         ];
     }
