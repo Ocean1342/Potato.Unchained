@@ -7,6 +7,7 @@ use App\Exceptions\ApiExceptions\ApiDataNotFoundException;
 use App\Http\Controllers\Api\Order\Requests\ApiOrderRequest;
 use App\Models\Dish;
 use App\Models\Order;
+use App\Services\Senders\Telegram\TelegramSender;
 use Exception;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
@@ -26,58 +27,17 @@ class CreateOrderHandler extends AbstractOrderHandler
      */
     public function handle(ApiOrderRequest $request): JsonResponse
     {
-        //проверка на то, что все блюда из одного ресторана
-        if (count($request->toArray()['dishes']) > 1)
-            $this->checkRestaurantId($request->toArray()['dishes']);
-
         $createdOrder = $this->ordersRepositories->createOrder($request);
         if (array_key_exists('chat_id', $request->all()['user'])) {
             //отправить уведомление в телеграм
-            $this->sendTelegramMessage($request->all()['user']['chat_id'], $createdOrder);
+            $sender = new TelegramSender($request->all()['user']['chat_id']);
+            $sender->sendMessage('Order created. Order ID:' . $createdOrder->id);
         }
         return response()->json([
             'success' => true,
             'message' => 'Order Created. Order ID: ' . $createdOrder->id,
             'order_id' => $createdOrder->id
         ]);
-    }
-
-    /**
-     * @param mixed $chat_id
-     * @param Order $createdOrder
-     */
-    protected function sendTelegramMessage(mixed $chat_id, Order $createdOrder): void
-    {
-        try {
-            TeleBot::sendMessage([
-                'chat_id' => $chat_id,
-                'text' => 'Order created. Order ID:' . $createdOrder->id
-            ]);
-        } catch (Exception $e) {
-            Log::warning('Error when send to telegram', collect($e)->toArray());
-        }
-    }
-
-    /**
-     * @param array $arDishes
-     * @throws ApiDataNotFoundException
-     */
-    protected function checkRestaurantId(array $arDishes): void
-    {
-        $firstDishCategory = $this->validateDish($arDishes[1]['dish_id']);
-        foreach ($arDishes as $dish) {
-            $curDishRestaurantId = $this->validateDish($dish['dish_id'])->restaurant_id;
-            if ($firstDishCategory->restaurant_id !== $curDishRestaurantId) {
-
-                throw new HttpResponseException(response()->json(
-                    [
-                        'success' => 'false',
-                        'message' => 'Dishes must be from the same restaurant'
-                    ],
-                    400)
-                );
-            }
-        }
     }
 
 }

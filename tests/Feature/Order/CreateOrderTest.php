@@ -2,20 +2,18 @@
 
 namespace Tests\Feature\Order;
 
-use App\Http\Controllers\Api\Order\Requests\ApiOrderRequest;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
 use App\Services\Routes\Providers\Api\ApiRoutes;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class CreateOrderTest extends TestCase
 {
-    /**
-     *
-     * */
-    public function dataProvider()
+    use RefreshDataBase;
+
+    protected $seed = true;
+
+    public function dataProvider(): array
     {
         return [
             'wrong Token' => [1, 2, 400],
@@ -49,25 +47,48 @@ class CreateOrderTest extends TestCase
         $response->assertStatus($assertStatus);
     }
 
+    public function dataDishesProvider(): array
+    {
+        return [
+            'dishes from not same restaurant' => [
+                400,
+                'dishesIds' => [1, 5]
+            ],
+            'valid one right dish' => [
+                'status' => 200,
+                'dishesIds' => [1]
+
+            ],
+            'wrong one dish' => [
+                'status' => 400,
+                'dishesIds' => [99999]
+            ],
+        ];
+
+    }
+
+
     /**
-     * Проверяет корректное создание заказа
+     * Проверяет создание заказа
      *
      * @return void
      * @group createOrder
-     *
+     ** @dataProvider dataDishesProvider
      */
-    public function test_create_order_right_user_assert_200()
+    public function test_create_order($expectedStatus, $arDishes)
     {
+        $requestArrayDishes = [];
+        foreach ($arDishes as $k => $dishId) {
+            $requestArrayDishes[$k] = [
+                'dish_id' => $dishId,
+                'amount' => rand(1, 10)
+            ];
+        }
         $request = [
             'user' => [
                 'id' => 1
             ],
-            'dishes' => [
-                1 => [
-                    'dish_id' => 1,
-                    'amount' => 2
-                ]
-            ]
+            'dishes' => $requestArrayDishes
         ];
         $headers = [
             'Authorization' => 'Bearer ' . User::find(1)->generateTestToken()
@@ -77,6 +98,6 @@ class CreateOrderTest extends TestCase
             $request,
             $headers
         );
-        $response->assertStatus(200);
+        $response->assertStatus($expectedStatus);
     }
 }
