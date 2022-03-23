@@ -8,13 +8,25 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ *
+ */
 abstract class AbstractRepositories
 {
+    /**
+     * @var Model
+     */
     protected Model $model;
 
+    /**
+     * @return mixed
+     */
     abstract protected function setModel();
 
 
+    /**
+     * @return Model
+     */
     protected function getModel(): Model
     {
         $model = $this->setModel();
@@ -28,11 +40,17 @@ abstract class AbstractRepositories
     {
         $result = $this->getModel()->find($id);
         if (!$result)
-                throw new ApiDataNotFoundException('Data Not found by ID: '.$id);
-            return $result;
+            throw new ApiDataNotFoundException('Data Not found by ID: ' . $id);
+        return $result;
 
     }
 
+    /**
+     * @param array $filters
+     * @param int $limit
+     * @param int $offset
+     * @return Collection
+     */
     public function getBy(array $filters = [], int $limit = 50, int $offset = 0): Collection
     {
         $model = $this->getModel();
@@ -45,6 +63,11 @@ abstract class AbstractRepositories
         return $qb->get();
     }
 
+    /**
+     * @param Builder $qb
+     * @param array $filters
+     * @return void
+     */
     protected function applyFilters(Builder $qb, array $filters): void
     {
         if (!empty($filters['title'])) {

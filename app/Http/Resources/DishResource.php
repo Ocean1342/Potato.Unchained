@@ -5,6 +5,9 @@ namespace App\Http\Resources;
 use App\Models\Dish;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ *
+ */
 class DishResource extends JsonResource
 {
 

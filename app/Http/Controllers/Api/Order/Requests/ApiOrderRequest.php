@@ -9,6 +9,9 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
+/**
+ *
+ */
 class ApiOrderRequest extends FormRequest
 {
 
@@ -37,6 +40,10 @@ class ApiOrderRequest extends FormRequest
         ];
     }
 
+    /**
+     * @param Validator $validator
+     * @return void
+     */
     public function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json([

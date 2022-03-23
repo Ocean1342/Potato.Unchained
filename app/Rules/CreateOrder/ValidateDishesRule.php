@@ -29,7 +29,7 @@ class ValidateDishesRule implements Rule
     public function passes($attribute, $dish_id)
     {
 
-        //выбросить исключение, если такого продукта нет
+        // Throw exception if product doesn't exist
         $curDish = Dish::find($dish_id);
 
         if (!$curDish) {

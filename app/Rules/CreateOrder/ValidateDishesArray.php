@@ -21,7 +21,7 @@ class ValidateDishesArray implements Rule
 
         $dishValidate = new ValidateDishesRule();
         $firstDishValidateBool = $dishValidate->passes('dish_id', $value[array_key_first($value)]['dish_id']);
-        //получаем айди ресторана у первого блюда, чтобы далее сравнить его со всеми
+        //get first restaurant id and compare it with the rest ids
         if ($firstDishValidateBool)
             $this->currentDish = Dish::find($value[array_key_first($value)]['dish_id']);
             $firstDishRestaurantId = $this->currentDish->restaurant_id;

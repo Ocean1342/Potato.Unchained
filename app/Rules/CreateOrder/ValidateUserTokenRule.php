@@ -8,8 +8,7 @@ use Illuminate\Contracts\Validation\Rule;
 class ValidateUserTokenRule implements Rule
 {
     /**
-     * Проверка на то, что user_id в заказе и токен авторизации совпадают.
-     * Пользователь может делать заказ только под своим id
+     * The authorization token must belong to the user from the order
      *
      * @return void
      */

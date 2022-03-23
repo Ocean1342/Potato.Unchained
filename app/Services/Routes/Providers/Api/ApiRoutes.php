@@ -2,6 +2,9 @@
 
 namespace App\Services\Routes\Providers\Api;
 
+/**
+ * Class with names of Api Routes
+ */
 class ApiRoutes
 {
     const API_RESTAURANT_INDEX = 'restaurant.index';

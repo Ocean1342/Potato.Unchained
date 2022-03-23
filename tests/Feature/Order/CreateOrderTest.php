@@ -22,8 +22,7 @@ class CreateOrderTest extends TestCase
     }
 
     /**
-     * Тест должен проверять соответствие айди юзера в заказе и айди юзера,
-     * которому принадлежит токен авторизации
+     * Test that the authorization token must belong to the user from the order
      *
      * @return void
      * @group createOrder
@@ -69,7 +68,7 @@ class CreateOrderTest extends TestCase
 
 
     /**
-     * Проверяет создание заказа
+     * Check order create
      *
      * @return void
      * @group createOrder

@@ -13,6 +13,10 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class OrderResource extends JsonResource
 {
 
+    /**
+     * @param $request
+     * @return array
+     */
     public function toArray($request)
     {
         //return parent::toArray($request);
