@@ -6,13 +6,28 @@ use App\Services\Senders\Sender;
 use Illuminate\Support\Facades\Log;
 use WeStacks\TeleBot\Laravel\TeleBot;
 
-class TelegramSender extends Sender
+/**
+ * Send messages to Telegram
+ */
+class TelegramSender implements Sender
 {
-    public function __construct(protected mixed $chat_id)
+
+    /**
+     * Set user chat id
+     *
+     * @param mixed $chat_id
+     * @return void
+     */
+    public function setChatId(mixed $chat_id): void
     {
+        $this->chat_id = $chat_id;
     }
 
-    public function sendMessage($message): bool
+    /**
+     * @param mixed $message
+     * @return bool
+     */
+    public function sendMessage(mixed $message): bool
     {
         try {
             TeleBot::sendMessage([

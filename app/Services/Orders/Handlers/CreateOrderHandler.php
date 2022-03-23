@@ -6,13 +6,10 @@ namespace App\Services\Orders\Handlers;
 use App\Exceptions\ApiExceptions\ApiDataNotFoundException;
 use App\Http\Controllers\Api\Order\Requests\ApiOrderRequest;
 use App\Models\Dish;
-use App\Models\Order;
-use App\Services\Senders\Telegram\TelegramSender;
-use Exception;
-use Illuminate\Http\Exceptions\HttpResponseException;
+use App\Services\Senders\Sender;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Log;
-use WeStacks\TeleBot\Laravel\TeleBot;
+use Illuminate\Support\Facades\App;
+
 
 /**
  * @mixin Dish
@@ -30,8 +27,10 @@ class CreateOrderHandler extends AbstractOrderHandler
         $createdOrder = $this->ordersRepositories->createOrder($request);
         if (array_key_exists('chat_id', $request->all()['user'])) {
             //отправить уведомление в телеграм
-            $sender = new TelegramSender($request->all()['user']['chat_id']);
+            $sender = App::make(Sender::class);
+            $sender->setChatId($request->all()['user']['chat_id']);
             $sender->sendMessage('Order created. Order ID:' . $createdOrder->id);
+
         }
         return response()->json([
             'success' => true,

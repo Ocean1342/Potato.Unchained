@@ -2,7 +2,14 @@
 
 namespace App\Services\Senders;
 
-abstract class Sender
+/**
+ *
+ */
+interface Sender
 {
-    abstract public function sendMessage($message): bool;
+    /**
+     * @param $message
+     * @return bool
+     */
+    public function sendMessage($message): bool;
 }
