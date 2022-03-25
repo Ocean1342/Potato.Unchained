@@ -1,12 +1,12 @@
-#API Food ordering service
+# API Food ordering service
 Food ordering service with notification to Telegram.
 
-##Requirements
+## Requirements
 - Git
 - Docker  >= 17.12 
 - PHP >= 8.0
 
-##Installation 
+## Installation 
 Create a folder for project. 
 Use [laradock documentation](https://laradock.io/getting-started/). 
 
@@ -49,7 +49,7 @@ For getting Telegram updates:
 ```
 php artisan telebot:polling &
 ```
-##Usage
+## Usage
 You can get auth-token in admin panel (/login) 
  or create with tinker:
 
